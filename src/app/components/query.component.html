@@ -1,0 +1,71 @@
+<form class="flex-container flex-vert v-100 h-100" (ngSubmit)="onExecute()">
+
+    <mat-card>
+      <mat-card-title>Configuration</mat-card-title>
+  
+      <div>
+        <mat-form-field appearance="standard" class="endpoint">
+          <mat-label>Endpoint</mat-label>
+          <input matInput required type="text" placeholder="Endpoint" aria-label="Endpoint" [formControl]="endpoint"
+            [matAutocomplete]="autoEndpoint">
+          <mat-autocomplete autoActiveFirstOption #autoEndpoint="matAutocomplete" [displayWith]="name">
+            <mat-option *ngFor="let endpoint of endpoints | async" [value]="endpoint">
+              {{endpoint.name}} [{{endpoint.value}}]
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  
+        <mat-form-field appearance="standard">
+          <mat-label>Token</mat-label>
+          <input matInput required type="text" placeholder="Token" aria-label="Token" [formControl]="token"
+            [matAutocomplete]="autoToken">
+          <mat-autocomplete autoActiveFirstOption #autoToken="matAutocomplete" [displayWith]="name">
+            <mat-option *ngFor="let token of tokens | async" [value]="token">
+              {{token.name}} [{{token.value}}]
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+  
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Database</mat-label>
+          <select matNativeControl required [formControl]="selectedDatabase">
+            <option *ngFor="let db of databases | async" [value]="db">{{db}}</option>
+          </select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="standard">
+          <mat-label>Table</mat-label>
+          <select matNativeControl required [formControl]="selectedTable">
+            <option *ngFor="let table of tables | async" [value]="table">{{table}}</option>
+          </select>
+        </mat-form-field>
+      </div>
+  
+    </mat-card>
+  
+    <mat-card class="container h-100 flex-grow-1">
+      <mat-card-title>Query</mat-card-title>
+      <mat-form-field class="header" appearance="standard" class="code w-100">
+        <mat-label>SQL</mat-label>
+        <textarea matInput placeholder="SELECT * FROM &lt;table&gt;" aria-label="Query" rows="5"
+          [formControl]="query"></textarea>
+      </mat-form-field>
+      <mat-card-actions align="end">
+        <button mat-button [cdkCopyToClipboard]="getAsCurl()" class="btn btn-success">Copy as curl</button>
+        <button mat-button type="submit" class="btn btn-success">Execute</button>
+      </mat-card-actions>
+      <textarea readonly aria-label="Results" [formControl]="results" class="noresize w-100 h-100"></textarea>
+    </mat-card>
+  
+    <div class="stats">
+      <div>Sneller version: {{(stats | async)?.snellerVersion}}</div>
+      <div>Query ID: {{(stats | async)?.queryID}}</div>
+      <div>Max scanned (bytes): {{(stats | async)?.maxScannedBytes | bytes}}</div>
+      <div>Total table (bytes): {{(stats | async)?.totalTableBytes | bytes}}</div>
+      <div>Cache hits: {{(stats | async)?.hits}}</div>
+      <div>Cache misses: {{(stats | async)?.misses}}</div>
+      <div>Duration (ms): {{(stats | async)?.duration}}</div>
+    </div>
+  </form>

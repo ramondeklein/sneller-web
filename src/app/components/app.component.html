@@ -1,0 +1,28 @@
+<div class="flex-container flex-vert h-100 w-100">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+            <span>Sneller query console</span>
+            <!-- <span class="spacer"></span>
+            <button mat-icon-button aria-label="Settings" [routerLink]="'/configuration'">
+                <mat-icon>settings</mat-icon>
+              </button> -->
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="flex-fill flex-container w-100">
+        <mat-sidenav-container>
+            <mat-sidenav mode="side" [(opened)]="opened" mode="side">
+                <mat-nav-list>
+                    <mat-list role="list">
+                        <a mat-list-item routerLink="/query" routerLinkActive="active">Queries</a>
+                        <a mat-list-item routerLink="/configuration/endpoints" routerLinkActive="active">Endpoints</a>
+                        <a mat-list-item routerLink="/configuration/tokens" routerLinkActive="active">Tokens</a>
+                    </mat-list>
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>    
+    </div>
+</div>

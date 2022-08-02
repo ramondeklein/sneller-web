@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+.container {
+  display: flex;
+  flex-flow: column;
+}
+
+mat-form-field {
+  padding-right: 10px;
+  min-width: 400px;
+
+  &.code {
+    textarea {
+      font-family: monospace;
+    }
+  }
+}
+
+textarea {
+  border: none;
+  outline: none;
+  &.noresize {
+    resize: none;
+  }
+}

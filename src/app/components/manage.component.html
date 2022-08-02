@@ -1,0 +1,47 @@
+<div>
+    <div>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let item of items | async" routerLinkActive="active">
+                <a matLine [routerLink]="[getRoute(item)]" class="buttons-right">
+                    <span>{{ item.name }}</span>
+                    <button mat-icon-button (click)="onDelete(item.name)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </a>
+            </mat-list-item>
+        </mat-nav-list>
+        <button mat-button [routerLink]="['new']" class="btn btn-success">Add</button>
+    </div>
+
+    <div>
+        <mat-card>
+            <form class="container" [formGroup]="editForm" (ngSubmit)="onSave()">
+                <div>
+                    <mat-form-field appearance="standard" class="name">
+                        <mat-label>Name</mat-label>
+                        <input matInput required type="text" placeholder="Name" aria-label="Name"
+                            formControlName="name" />
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="standard" class="item">
+                        <mat-label>{{label}}</mat-label>
+                        <input matInput required type="text" placeholder="{{label}}" [attr.aria-label]="label"
+                            formControlName="item" />
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="standard" class="description">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput placeholder="Description" aria-label="Description" rows="5"
+                            formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <button mat-button type="submit" [disabled]="!editForm.valid" class="btn btn-success">Save</button>
+            </form>
+        </mat-card>
+    </div>
+</div>

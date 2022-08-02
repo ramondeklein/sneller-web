@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/theming";
+
+$theme: $mat-indigo;    // TODO: can we fetch this somewhere?
+$primaryPalette: mat-palette($theme);
+$accentPalette:  mat-palette($theme, A200, A100, A400);
+
+// the default warn palette is red, so use that if the theme doesn't define one
+$warnPalette:    mat-palette($mat-red);
+
+.active {
+    color: mat-color($accentPalette) !important; // TODO: this should probably be done different
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.h-100 {
+    height: 100%;
+
+    .mat-form-field-wrapper,
+    .mat-form-field-infix,
+    .mat-form-field-infix textarea {
+        display: flex;
+        height: 100%;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+.flex-container {
+    display: flex;
+
+    &.flex-hor {
+        flex-flow: row;
+    }
+
+    &.flex-vert {
+        flex-flow: column;
+    }
+
+    .flex-fill {
+        flex-grow: 1;
+    }
+}

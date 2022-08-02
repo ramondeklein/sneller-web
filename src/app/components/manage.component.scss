@@ -1,0 +1,11 @@
+mat-list-item a.buttons-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.name, .item, .description {
+    min-width: 300px;
+    max-width: 500px;
+}
